@@ -1,7 +1,11 @@
 \documentclass[12pt]{article}
 
 \begin{document}
-  Hello {{ name }}
+  Business plan: {{ name }}
+
+  Main goal: {{ main_goal }}
+
+  Providers: {% for provider_name, params in Provider.items() %}{{ provider_name }}, {% endfor %}
   This is a very simple file, though it does include some mathematical 
   symbols, $\beta, x$ and $y$,  and some equations,  
  \begin{equation} 

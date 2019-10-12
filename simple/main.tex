@@ -1,9 +1,9 @@
 \documentclass[a4paper,12pt]{article}
 \usepackage[T2A]{fontenc}
 \usepackage[utf8]{inputenc}
+\usepackage{pgf-pie}
 \usepackage[english,russian]{babel}
 \usepackage{amssymb,amsfonts,amsmath,mathtext,cite,enumerate,float}
-\usepackage[dvips]{graphicx}
 
 \begin{document}
   Мама мыла раму
@@ -12,4 +12,9 @@
   
   Main goal: {{ mainGoal }}
 
+\begin{tikzpicture}
+\pie [rotate = 180]
+    {62/\TeX\ Live and Mac\TeX,
+     32/MiK\TeX\ and Pro\TeX t, 6/Other \TeX}
+\end{tikzpicture}
 \end{document} 

@@ -46,19 +46,25 @@
 {% if CommercialEstate is defined and CommercialEstate|length %}
   {% for name, content in CommercialEstate.items() %}
     {{ name }}
-    {{ content.address }}
-    {{ content.area }}
-    {{ content.owningType }}
-    {{ content.payment }}
 
+    \begin{itemize}
+    \item Адрес: {{ content.address }}
+    \item Площадь: {{ content.area }}
+    \item Тип владения: {{ content.owningType }}
+    \item Ежемесячный платеж: {{ content.payment }}
+    \end{itemize}
     {% if Equipment in content %}
+    Оборудование:
+    \begin{enumerate}
       {% for equipmentName, params in content.Equipment.items() %}
-      {{ equipmentName }}
+      \item {{ equipmentName }}
+        \begin{itemize}
         {% for key, value in params.items() %}
-        {{ key }}: {{ value }}
-
+          \item {{ key }}: {{ value }}
         {% endfor %}
+        \end{itemize}
       {% endfor %}
+    \end{enumerate}
     {% endif %}
     {% if Worker in content %}
       {% for role, params in content.Worker.items() %}

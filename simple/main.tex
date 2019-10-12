@@ -13,6 +13,39 @@
 
   Прогноз инфляции: {{ inflationPrognosis }}
 
+{% if TargetHumanAuditory is defined and TargetHumanAuditory|length %}
+  \begin{itemize}
+  {% for name, content in TargetHumanAuditory.items() %}
+    \item {{ name }}
+
+    Возраст от {{ content.agesFrom }} до {{ content.agesTo }}
+    {% if content.sameCity %}в том же городе{% endif %}
+    {% if content.gender=='B' %} обоих полов
+    {% elif content.gender=='F' %}только женщины
+    {% else %}только мужчины
+    {% endif %}.
+    {% if content.when %}
+    Будут обращаться {{ content.when }}.
+    {% endif %}
+  {% endfor %}
+  \end{itemize}
+{% endif %}
+
+{% if TargetCompaniesAuditory is defined and TargetCompaniesAuditory|length %}
+  \begin{itemize}
+  {% for name, content in TargetCompaniesAuditory.items() %}
+    \item {{ name }}
+    Области деятельности:
+    \begin{itemize}
+    {% for f in content.field %}
+    \item {{ f }}
+    {% endfor %}
+    \end{itemize}
+    {% if content.sameCity %}в том же городе{% endif %}
+  {% endfor %}
+  \end{itemize}
+{% endif %}
+
 {% if Ad is defined and Ad|length %}
   {% for name, content in Ad.items() %}
     {% if content.isActive %}
@@ -112,23 +145,7 @@
   {% endfor %}
 {% endif %}
 
-{% if TargetHumanAuditory is defined and TargetHumanAuditory|length %}
-  \begin{itemize}
-  {% for name, content in TargetHumanAuditory.items() %}
-    \item {{ name }}
 
-    Возраст от {{ content.agesFrom }} до {{ content.agesTo }}
-    {% if content.sameCity %}в том же городе{% endif %}
-    {% if content.gender=='B' %} обоих полов
-    {% elif content.gender=='F' %}только женщины
-    {% else %}только мужчины
-    {% endif %}.
-    {% if content.when %}
-    Будут обращаться {{ content.when }}.
-    {% endif %}
-  {% endfor %}
-  \end{itemize}
-{% endif %}
 
 \begin{tikzpicture}
 \pie [rotate = 180]

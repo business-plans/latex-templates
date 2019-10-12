@@ -78,6 +78,40 @@
   {% endfor %}
 {% endif %}
 
+{% if Franchise is defined and Franchise|length %}
+  {% for name, content in Franchise.items() %}
+      {{ name }}
+
+      Роялти: {{ content.royalty }}
+      
+      База роялти: {{ content.royaltyBase }}
+      
+      База процента с продаж: {{ content.salesPercentBase }}
+
+      Возмещение расходов: {{ content.reimbursement }} {{ content.currency }}
+  {% endfor %}
+{% endif %}
+
+{% if MaterialsConversion is defined and MaterialsConversion|length %}
+  {% for name, content in MaterialsConversion.items() %}
+      {{ name }}
+
+      Рецепт: {{ content.recipe }}
+
+      Срок преобразования: {{ content.conversionTerm }} дней
+      
+      Можно ускориться в {{ content.multiplier }} раз
+
+      {% if InputMaterial in content.keys() %}
+      Для этого потребуется
+      \begin{itemize}
+      {% for mat in contnt.InputMaterial%}
+      \item {{ mat.substanceTags | join(" ") }} в количестве {{ mat.amount }}
+      {% endfor %}
+      \end{itemize}
+      {% endif %}
+  {% endfor %}
+{% endif %}
 
 
 \begin{tikzpicture}

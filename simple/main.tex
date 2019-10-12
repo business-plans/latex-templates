@@ -29,7 +29,6 @@
 
 {% if CommercialCredit is defined and CommercialCredit|length %}
   {% for name, content in CommercialCredit.items() %}
-    {% if content.isActive %}
       {{ name }}
 
       Банк: {{ content.bank }}
@@ -39,7 +38,6 @@
       Ставка: {{ content.rate }}
 
       Срок: {{ content.duration }} месяцев
-    {% endif %}
   {% endfor %}
 {% endif %}
 
@@ -53,7 +51,7 @@
     \item Тип владения: {{ content.owningType }}
     \item Ежемесячный платеж: {{ content.payment }}
     \end{itemize}
-    {% if Equipment in content %}
+    {% if 'Equipment' in content %}
     Оборудование:
     \begin{enumerate}
       {% for equipmentName, params in content.Equipment.items() %}
@@ -66,7 +64,7 @@
       {% endfor %}
     \end{enumerate}
     {% endif %}
-    {% if Worker in content %}
+    {% if 'Worker' in content %}
       {% for role, params in content.Worker.items() %}
       {{ role }}
         {% for key, value in params.items() %}
@@ -79,6 +77,7 @@
 {% endif %}
 
 {% if Franchise is defined and Franchise|length %}
+Франшиза:
   {% for name, content in Franchise.items() %}
       {{ name }}
 
@@ -102,7 +101,7 @@
       
       Можно ускориться в {{ content.multiplier }} раз
 
-      {% if InputMaterial in content.keys() %}
+      {% if 'InputMaterial' in content %}
       Для этого потребуется
       \begin{itemize}
       {% for mat in contnt.InputMaterial%}

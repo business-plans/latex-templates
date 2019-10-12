@@ -7,11 +7,11 @@
 \usepackage{amssymb,amsfonts,amsmath,mathtext,cite,enumerate,float}
 
 \begin{document}
-  Мама мыла раму
-
   Бизнес-план: {{ releaseName }}
   
   Основная цель: {{ mainGoal }}
+
+  Прогноз инфляции: {{ inflationPrognosis }}
 
 {% if Ad is defined and Ad|length %}
   {% for name, content in Ad.items() %}
@@ -112,6 +112,28 @@
   {% endfor %}
 {% endif %}
 
+{% if TargetHumanAuditory is defined and TargetHumanAuditory|length %}
+  \begin{itemize}
+  {% for name, content in TargetHumanAuditory.items() %}
+    \item name
+
+    Возраст от {{ content.agesFrom }} до {{ content.agesTo }}
+    {% if content.sameCity %}
+    в том же городе
+    {% endif %}
+    {% if content.gender=='B' %}
+    обоих полов
+    {% elif content.gender=='F' %}
+    только женщины
+    {% else %}
+    только мужчины
+    {% endif %}.
+    {% if content.when %}
+    Будут обращаться {{ content.when }}.
+    {% endif %}
+  {% endfor %}
+  \end{itemize}
+{% endif %}
 
 \begin{tikzpicture}
 \pie [rotate = 180]

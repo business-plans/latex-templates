@@ -114,7 +114,7 @@
     {
         {% set l=[] %}
         {% for name, value in content.getPrices.distribution.equipments.monthly.items() %}
-        {% if l.append(value+"/"+name) %}{% endif %}
+        {% if l.append(str(value)+"/"+str(name)) %}{% endif %}
         {% endfor %}
         {{ l | join(", ") }}
     }

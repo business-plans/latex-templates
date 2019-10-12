@@ -114,7 +114,7 @@
     \begin{tikzpicture}
     \pie [rotate = 180]
     {
-        {{ l | join(", ") }}, {{ 100-l|sum }}/Остальное
+        {{ l | join(", ") }}, {{ (100-l|sum)|string }}/Остальное
     }
     \end{tikzpicture}
     {% endif %}

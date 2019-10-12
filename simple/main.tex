@@ -37,7 +37,7 @@
     \item {{ name }}
     Области деятельности:
     \begin{itemize}
-    {% for f in content.field %}
+    {% for f in content.field|split(',') %}
     \item {{ f }}
     {% endfor %}
     \end{itemize}

@@ -106,6 +106,17 @@
         {% endfor %}
       {% endfor %}
     {% endif %}
+
+    Оборудование, расходы за месяц:
+
+    \begin{tikzpicture}
+    \pie [rotate = 180]
+    {
+        {% for name, value in content.getPrices.equipments.monthly.items() %}
+        {{ value }}/{{ name }},
+        {% endfor %}
+    }
+    \end{tikzpicture}
   {% endfor %}
 {% endif %}
 
@@ -144,14 +155,6 @@
       {% endif %}
   {% endfor %}
 {% endif %}
-
-
-
-\begin{tikzpicture}
-\pie [rotate = 180]
-    {62/\TeX\ Live and Mac\TeX,
-     32/MiK\TeX\ and Pro\TeX t, 6/Other \TeX}
-\end{tikzpicture}
 
 \begin{tikzpicture}
         \begin{axis}[

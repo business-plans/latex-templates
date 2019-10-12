@@ -112,7 +112,7 @@
     \begin{tikzpicture}
     \pie [rotate = 180]
     {
-        {% for name, value in content.getPrices.equipments.monthly.items() %}
+        {% for name, value in content.getPrices.distribution.equipments.monthly.items() %}
         {{ value }}/{{ name }},
         {% endfor %}
     }

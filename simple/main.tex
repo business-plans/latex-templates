@@ -109,10 +109,10 @@
     {% set l=[] %}
     {% set residue=0 %}
     {% for name, value in content.getPrices.distribution.equipments.monthly.items() %}
-    {% set tmp=(100*value/content.getPrices.perCategory.monthly['Оборудование'])|round %}
-    {% if tmp>3 and l.append( tmp|string + "/" + name|string ) %}
-    {% set residue=residue+tmp %}
-    {% endif %}
+      {% set tmp=(100*value/content.getPrices.perCategory.monthly['Оборудование'])|round %}
+      {% if tmp>3 and l.append( tmp|string + "/" + name|string ) %}
+        {% if residue=residue+tmp %} {% endif %}
+      {% endif %}
     {% endfor %}
     \begin{tikzpicture}
     \pie [rotate = 180]

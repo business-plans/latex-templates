@@ -91,7 +91,9 @@
       \item {{ equipmentName }}
         \begin{itemize}
         {% for key, value in params.items() %}
+        {% if key!= 'getPrices' %}
           \item {{ key }}: {{ value }}
+        {% endif %}
         {% endfor %}
         \end{itemize}
       {% endfor %}

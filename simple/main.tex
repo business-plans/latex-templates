@@ -101,8 +101,10 @@
       {% for role, params in content.Worker.items() %}
       {{ role }}
         {% for key, value in params.items() %}
+        {% if key!= 'getPrices' %}
         {{ key }}: {{ value }}
 
+        {% endif %}
         {% endfor %}
       {% endfor %}
     {% endif %}

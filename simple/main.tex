@@ -91,9 +91,7 @@
       \item {{ equipmentName }}
         \begin{itemize}
         {% for key, value in params.items() %}
-        {% if key!= 'getPrices' %}
-          \item {{ key }}: {{ value }}
-        {% endif %}
+        {% if key!= 'getPrices' %}\item {{ key }}: {{ value }}{% endif %}
         {% endfor %}
         \end{itemize}
       {% endfor %}
@@ -103,10 +101,7 @@
       {% for role, params in content.Worker.items() %}
       {{ role }}
         {% for key, value in params.items() %}
-        {% if key!= 'getPrices' %}
-        {{ key }}: {{ value }}
-
-        {% endif %}
+        {% if key!= 'getPrices' %}{{ key }}: {{ value }}{% endif %}
         {% endfor %}
       {% endfor %}
     {% endif %}
@@ -114,11 +109,11 @@
     {% if 'distribution' in content.getPrices %}
     Оборудование, расходы за месяц:
 
-    \begin{tikzpicture}
     {% set l=[] %}
+    {% for name, value in content.getPrices.distribution.equipments.monthly.items() %}{% if l.append( value|string + "/" + name|string ) %}{% endif %}{% endfor %}
+    \begin{tikzpicture}
     \pie [rotate = 180]
     {
-        {% for name, value in content.getPrices.distribution.equipments.monthly.items() %}{% if l.append( value|string + "/" + name|string ) %}{% endif %}{% endfor %}
         {{ l | join(", ") }}
     }
     \end{tikzpicture}

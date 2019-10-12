@@ -110,8 +110,9 @@
     {% set vv=[] %}
     {% for name, value in content.getPrices.distribution.equipments.monthly.items() %}
       {% set tmp=100*value/content.getPrices.perCategory.monthly['Оборудование'] %}
-      {% if tmp>3 and l.append( tmp|round|string + "/" + name|string )%}
-      {% elif vv.append(tmp) %}
+      {% if tmp>3 and l.append( tmp|round|int|string + "/" + name|string )%}
+      {% else %}
+      {% if vv.append(tmp) %}{% endif %}
       {% endif %}
     {% endfor %}
     \begin{tikzpicture}

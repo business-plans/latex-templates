@@ -107,11 +107,13 @@
     Оборудование, расходы за месяц:
 
     {% set l=[] %}
-    {% for name, value in content.getPrices.distribution.equipments.monthly.items() %}{% if l.append( (100*value/content.getPrices.perCategory.monthly['Оборудование'])|round|string + "/" + name|string ) %}{% endif %}{% endfor %}
+    {% set residue=0 %}
+    {% for name, value in content.getPrices.distribution.equipments.monthly.items() %}{%set tmp=(100*value/content.getPrices.perCategory.monthly['Оборудование'])|round%}
+    {% if tmp>3 and l.append( tmp|string + "/" + name|string ) %}{% set residue+=tmp %}{% endif %}{% endfor %}
     \begin{tikzpicture}
     \pie [rotate = 180]
     {
-        {{ l | join(", ") }}
+        {{ l | join(", ") }},{{ residue }}/Остальное
     }
     \end{tikzpicture}
     {% endif %}

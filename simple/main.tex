@@ -112,9 +112,11 @@
     \begin{tikzpicture}
     \pie [rotate = 180]
     {
+        {% set l=[] %}
         {% for name, value in content.getPrices.distribution.equipments.monthly.items() %}
-        {{ value }}/{{ name }},
+        {% if l.append(value+"/"+name) %}{% endif %}
         {% endfor %}
+        {{ l | join(", ") }}
     }
     \end{tikzpicture}
   {% endfor %}

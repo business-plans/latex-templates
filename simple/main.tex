@@ -107,17 +107,14 @@
     Оборудование, расходы за месяц:
 
     {% set l=[] %}
-    {% set residue=0 %}
     {% for name, value in content.getPrices.distribution.equipments.monthly.items() %}
       {% set tmp=(100*value/content.getPrices.perCategory.monthly['Оборудование'])|round %}
-      {% if tmp>3 and l.append( tmp|string + "/" + name|string ) %}
-        {% if residue=residue+tmp %} {% endif %}
-      {% endif %}
+      {% if tmp>3 and l.append( tmp|string + "/" + name|string ) %}{% endif %}
     {% endfor %}
     \begin{tikzpicture}
     \pie [rotate = 180]
     {
-        {{ l | join(", ") }}, {{ 100-residue }}/Остальное
+        {{ l | join(", ") }}, {{ 100-l|sum }}/Остальное
     }
     \end{tikzpicture}
     {% endif %}

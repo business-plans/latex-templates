@@ -104,7 +104,7 @@
       {% if 'InputMaterial' in content %}
       Для этого потребуется
       \begin{itemize}
-      {% for mat in contnt.InputMaterial%}
+      {% for mat in content.InputMaterial%}
       \item {{ mat.substanceTags | join(" ") }} в количестве {{ mat.amount }}
       {% endfor %}
       \end{itemize}

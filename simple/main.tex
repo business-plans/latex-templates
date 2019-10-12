@@ -115,18 +115,13 @@
 {% if TargetHumanAuditory is defined and TargetHumanAuditory|length %}
   \begin{itemize}
   {% for name, content in TargetHumanAuditory.items() %}
-    \item name
+    \item {{ name }}
 
     Возраст от {{ content.agesFrom }} до {{ content.agesTo }}
-    {% if content.sameCity %}
-    в том же городе
-    {% endif %}
-    {% if content.gender=='B' %}
-    обоих полов
-    {% elif content.gender=='F' %}
-    только женщины
-    {% else %}
-    только мужчины
+    {% if content.sameCity %}в том же городе{% endif %}
+    {% if content.gender=='B' %} обоих полов
+    {% elif content.gender=='F' %}только женщины
+    {% else %}только мужчины
     {% endif %}.
     {% if content.when %}
     Будут обращаться {{ content.when }}.

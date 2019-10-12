@@ -9,9 +9,70 @@
 \begin{document}
   Мама мыла раму
 
-  Business plan: {{ name }}
+  Бизнес-план: {{ releaseName }}
   
-  Main goal: {{ mainGoal }}
+  Основная цель: {{ mainGoal }}
+
+{% if Ad is defined and Ad|length %}
+  {% for name, content in Ad.items() %}
+    {% if content.isActive %}
+      {{ name }}
+
+      Описание: {{ content.description }}
+      
+      Начальная цена: {{ content.initialPrice }}
+      
+      Цена за месяц: {{ content.pricePerMonth }}
+    {% endif %}
+  {% endfor %}
+{% endif %}
+
+{% if CommercialCredit is defined and CommercialCredit|length %}
+  {% for name, content in CommercialCredit.items() %}
+    {% if content.isActive %}
+      {{ name }}
+
+      Банк: {{ content.bank }}
+      
+      Цена: {{ content.price }}
+      
+      Ставка: {{ content.rate }}
+
+      Срок: {{ content.duration }} месяцев
+    {% endif %}
+  {% endfor %}
+{% endif %}
+
+{% if CommercialEstate is defined and CommercialEstate|length %}
+  {% for name, content in CommercialEstate.items() %}
+    {{ name }}
+    {{ content.address }}
+    {{ content.area }}
+    {{ content.owningType }}
+    {{ content.payment }}
+
+    {% if Equipment in content %}
+      {% for equipmentName, params in content.Equipment.items() %}
+      {{ equipmentName }}
+        {% for key, value in params.items() %}
+        {{ key }}: {{ value }}
+
+        {% endfor %}
+      {% endfor %}
+    {% endif %}
+    {% if Worker in content %}
+      {% for role, params in content.Worker.items() %}
+      {{ role }}
+        {% for key, value in params.items() %}
+        {{ key }}: {{ value }}
+
+        {% endfor %}
+      {% endfor %}
+    {% endif %}
+  {% endfor %}
+{% endif %}
+
+
 
 \begin{tikzpicture}
 \pie [rotate = 180]

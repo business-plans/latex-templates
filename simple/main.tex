@@ -38,8 +38,7 @@
     Области деятельности:
     \begin{itemize}
     {% for f in content.field.split(',') %}
-    \item {{ f }}
-    {% endfor %}
+    \item {{ f }}{% endfor %}
     \end{itemize}
     {% if content.sameCity %}в том же городе{% endif %}
   {% endfor %}
@@ -91,8 +90,7 @@
       \item {{ equipmentName }}
         \begin{itemize}
         {% for key, value in params.items() %}
-        {% if key!= 'getPrices' %}\item {{ key }}: {{ value }}{% endif %}
-        {% endfor %}
+        {% if key!= 'getPrices' %}\item {{ key }}: {{ value }}{% endif %}{% endfor %}
         \end{itemize}
       {% endfor %}
     \end{enumerate}
@@ -101,8 +99,7 @@
       {% for role, params in content.Worker.items() %}
       {{ role }}
         {% for key, value in params.items() %}
-        {% if key!= 'getPrices' %}{{ key }}: {{ value }}{% endif %}
-        {% endfor %}
+        {% if key!= 'getPrices' %}{{ key }}: {{ value }}{% endif %}{% endfor %}
       {% endfor %}
     {% endif %}
 
@@ -110,7 +107,7 @@
     Оборудование, расходы за месяц:
 
     {% set l=[] %}
-    {% for name, value in content.getPrices.distribution.equipments.monthly.items() %}{% if l.append( value|string + "/" + name|string ) %}{% endif %}{% endfor %}
+    {% for name, value in content.getPrices.distribution.equipments.monthly.items() %}{% if l.append( (100*value/content.getPrices.perCategory.monthly['Оборудование'])|string + "/" + name|string ) %}{% endif %}{% endfor %}
     \begin{tikzpicture}
     \pie [rotate = 180]
     {
@@ -150,8 +147,7 @@
       Для этого потребуется
       \begin{itemize}
       {% for mat in content.InputMaterial%}
-      \item {{ mat.substanceTags | join(" ") }} в количестве {{ mat.amount }}
-      {% endfor %}
+      \item {{ mat.substanceTags | join(" ") }} в количестве {{ mat.amount }}{% endfor %}
       \end{itemize}
       {% endif %}
   {% endfor %}

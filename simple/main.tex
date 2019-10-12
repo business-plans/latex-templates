@@ -107,18 +107,18 @@
       {% endfor %}
     {% endif %}
 
+    {% if 'distribution' in content.getPrices %}
     Оборудование, расходы за месяц:
 
     \begin{tikzpicture}
+    {% set l=[] %}
     \pie [rotate = 180]
     {
-        {% set l=[] %}
-        {% for name, value in content.getPrices.distribution.equipments.monthly.items() %}
-        {% if l.append( value|string + "/" + name|string ) %}{% endif %}
-        {% endfor %}
+        {% for name, value in content.getPrices.distribution.equipments.monthly.items() %}{% if l.append( value|string + "/" + name|string ) %}{% endif %}{% endfor %}
         {{ l | join(", ") }}
     }
     \end{tikzpicture}
+    {% endif %}
   {% endfor %}
 {% endif %}
 

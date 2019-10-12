@@ -1,0 +1,815 @@
+\documentclass[a4paper,12pt]{article}
+\usepackage[T2A]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{pgf-pie}
+\usepackage{pgfplots}
+\usepackage[english,russian]{babel}
+\usepackage{amssymb,amsfonts,amsmath,mathtext,cite,enumerate,float}
+
+\begin{document}
+  Бизнес-план: xasx
+  
+  Основная цель: open canteen
+
+  Прогноз инфляции: 4.0
+
+
+  \begin{itemize}
+  
+    \item Прохожие
+
+    Возраст от 18 до 99
+    в том же городе
+     обоих полов
+    .
+    
+  
+    \item Работники предприятий
+
+    Возраст от 18 до 65
+    в том же городе
+     обоих полов
+    .
+    
+    Будут обращаться в обед.
+    
+  
+  \end{itemize}
+
+
+
+  \begin{itemize}
+  
+    \item Организаторы торжеств
+    Области деятельности:
+    \begin{itemize}
+    
+    \item свадьбы
+    
+    \item  поминки
+    
+    \item  корпоративы
+    
+    \end{itemize}
+    в том же городе
+  
+  \end{itemize}
+
+
+
+  
+    
+      Вывеска
+
+      Описание: Светящаяся вывеска
+      
+      Начальная цена: 5000
+      
+      Цена за месяц: 100
+    
+  
+
+
+
+  
+      Start
+
+      Банк: vtb
+      
+      Цена: 100000
+      
+      Ставка: 15.0
+
+      Срок: 36 месяцев
+  
+
+
+
+  
+    Зал
+
+    \begin{itemize}
+    \item Адрес: невский, 50
+    \item Площадь: 60
+    \item Тип владения: rent
+    \item Ежемесячный платеж: 60000
+    \end{itemize}
+    
+    Оборудование:
+    \begin{enumerate}
+      
+      \item Бойлер
+        \begin{itemize}
+        
+          \item getPrices: {'start': 10000, 'monthly': 416}
+        
+          \item currency: RUB
+        
+          \item requiredToStart: True
+        
+          \item price: 10000
+        
+          \item count: 1
+        
+          \item leasingTerm: 12
+        
+          \item serviceTerm: 24
+        
+          \item watts: 3000
+        
+          \item mass: 7
+        
+        \end{itemize}
+      
+      \item Витрина
+        \begin{itemize}
+        
+          \item getPrices: {'start': 30000, 'monthly': 1250}
+        
+          \item currency: RUB
+        
+          \item requiredToStart: True
+        
+          \item price: 15000
+        
+          \item count: 2
+        
+          \item leasingTerm: 12
+        
+          \item serviceTerm: 24
+        
+          \item watts: 500
+        
+          \item mass: 15
+        
+          \item tags: ['зал', 'витрина']
+        
+        \end{itemize}
+      
+      \item Касса
+        \begin{itemize}
+        
+          \item getPrices: {'start': 10000, 'monthly': 416}
+        
+          \item currency: RUB
+        
+          \item requiredToStart: True
+        
+          \item price: 10000
+        
+          \item count: 1
+        
+          \item leasingTerm: 12
+        
+          \item serviceTerm: 24
+        
+          \item mass: 1
+        
+          \item tags: ['зал', 'касса']
+        
+        \end{itemize}
+      
+      \item Колонки
+        \begin{itemize}
+        
+          \item getPrices: {'start': 0, 'monthly': 0}
+        
+          \item currency: RUB
+        
+          \item requiredToStart: True
+        
+          \item count: 1
+        
+          \item leasingTerm: 12
+        
+          \item serviceTerm: 24
+        
+          \item watts: 50
+        
+          \item mass: 1
+        
+          \item tags: ['колонки']
+        
+        \end{itemize}
+      
+      \item Конвекционная печь
+        \begin{itemize}
+        
+          \item getPrices: {'start': 30000, 'monthly': 500}
+        
+          \item currency: RUB
+        
+          \item requiredToStart: True
+        
+          \item price: 30000
+        
+          \item count: 1
+        
+          \item leasingTerm: 12
+        
+          \item serviceTerm: 60
+        
+          \item watts: 3000
+        
+          \item mass: 50
+        
+          \item tags: ['зал', 'печь']
+        
+        \end{itemize}
+      
+      \item Кофеварка
+        \begin{itemize}
+        
+          \item getPrices: {'start': 15000, 'monthly': 625}
+        
+          \item currency: RUB
+        
+          \item requiredToStart: True
+        
+          \item price: 15000
+        
+          \item count: 1
+        
+          \item leasingTerm: 12
+        
+          \item serviceTerm: 24
+        
+          \item watts: 800
+        
+          \item mass: 5
+        
+        \end{itemize}
+      
+      \item Мусорка
+        \begin{itemize}
+        
+          \item getPrices: {'start': 1000, 'monthly': 16}
+        
+          \item currency: RUB
+        
+          \item requiredToStart: True
+        
+          \item price: 1000
+        
+          \item count: 1
+        
+          \item leasingTerm: 12
+        
+          \item serviceTerm: 60
+        
+          \item mass: 7
+        
+          \item tags: ['мусорка']
+        
+        \end{itemize}
+      
+      \item Ноутбук
+        \begin{itemize}
+        
+          \item getPrices: {'start': 35000, 'monthly': 1458}
+        
+          \item currency: RUB
+        
+          \item requiredToStart: True
+        
+          \item price: 35000
+        
+          \item count: 1
+        
+          \item leasingTerm: 12
+        
+          \item serviceTerm: 24
+        
+          \item mass: 1
+        
+          \item tags: ['ноутбук']
+        
+        \end{itemize}
+      
+      \item Освещение
+        \begin{itemize}
+        
+          \item getPrices: {'start': 20000, 'monthly': 833}
+        
+          \item currency: RUB
+        
+          \item requiredToStart: True
+        
+          \item price: 20000
+        
+          \item count: 1
+        
+          \item leasingTerm: 12
+        
+          \item serviceTerm: 24
+        
+          \item mass: 1
+        
+          \item tags: ['зал', 'освещение']
+        
+        \end{itemize}
+      
+      \item Поднос
+        \begin{itemize}
+        
+          \item getPrices: {'start': 1500, 'monthly': 62}
+        
+          \item currency: RUB
+        
+          \item requiredToStart: True
+        
+          \item price: 50
+        
+          \item count: 30
+        
+          \item leasingTerm: 12
+        
+          \item serviceTerm: 24
+        
+          \item mass: 1
+        
+          \item tags: ['зал', 'поднос']
+        
+        \end{itemize}
+      
+      \item Стол
+        \begin{itemize}
+        
+          \item getPrices: {'start': 45000, 'monthly': 750}
+        
+          \item currency: RUB
+        
+          \item requiredToStart: True
+        
+          \item price: 3000
+        
+          \item count: 15
+        
+          \item leasingTerm: 12
+        
+          \item serviceTerm: 60
+        
+          \item mass: 10
+        
+          \item tags: ['стол']
+        
+        \end{itemize}
+      
+      \item Стул
+        \begin{itemize}
+        
+          \item getPrices: {'start': 60000, 'monthly': 2500}
+        
+          \item currency: RUB
+        
+          \item requiredToStart: True
+        
+          \item price: 2000
+        
+          \item count: 30
+        
+          \item leasingTerm: 12
+        
+          \item serviceTerm: 24
+        
+          \item mass: 1
+        
+          \item tags: ['зал', 'стул']
+        
+        \end{itemize}
+      
+      \item Телевизор
+        \begin{itemize}
+        
+          \item getPrices: {'start': 15000, 'monthly': 625}
+        
+          \item currency: RUB
+        
+          \item requiredToStart: True
+        
+          \item price: 15000
+        
+          \item count: 1
+        
+          \item leasingTerm: 12
+        
+          \item serviceTerm: 24
+        
+          \item watts: 500
+        
+          \item mass: 1
+        
+          \item tags: ['телевизор']
+        
+        \end{itemize}
+      
+      \item Тряпка
+        \begin{itemize}
+        
+          \item getPrices: {'start': 300, 'monthly': 12}
+        
+          \item currency: RUB
+        
+          \item requiredToStart: True
+        
+          \item price: 50
+        
+          \item count: 6
+        
+          \item leasingTerm: 12
+        
+          \item serviceTerm: 24
+        
+          \item mass: 1
+        
+          \item tags: ['зал', 'тряпка']
+        
+        \end{itemize}
+      
+      \item Швабра
+        \begin{itemize}
+        
+          \item getPrices: {'start': 200, 'monthly': 8}
+        
+          \item currency: RUB
+        
+          \item requiredToStart: True
+        
+          \item price: 200
+        
+          \item count: 1
+        
+          \item leasingTerm: 12
+        
+          \item serviceTerm: 24
+        
+          \item mass: 1
+        
+          \item tags: ['зал', 'швабра']
+        
+        \end{itemize}
+      
+      \item Эквайринг
+        \begin{itemize}
+        
+          \item getPrices: {'start': 3000, 'monthly': 125}
+        
+          \item currency: RUB
+        
+          \item requiredToStart: True
+        
+          \item price: 3000
+        
+          \item count: 1
+        
+          \item leasingTerm: 12
+        
+          \item serviceTerm: 24
+        
+          \item mass: 1
+        
+          \item tags: ['зал', 'эквайринг']
+        
+        \end{itemize}
+      
+    \end{enumerate}
+    
+    
+      
+      Кассир
+        
+        getPrices: {'start': 78965, 'monthly': 68965, 'taxes': 7471, 'insurance': 11494}
+
+        
+        currency: RUB
+
+        
+        requiredToStart: True
+
+        
+        minSalary: 20000
+
+        
+        maxSalary: 30000
+
+        
+        tax: 13
+
+        
+        insurance: 20
+
+        
+        count: 2
+
+        
+        clothes: 5000
+
+        
+        duties: продавать бутерброды
+
+        
+        equipmentSelector: ['витрина', 'касса', 'печь', 'поднос', 'кофеварка']
+
+        
+      
+      Уборщица
+        
+        getPrices: {'start': 15103, 'monthly': 13103, 'taxes': 1419, 'insurance': 2183}
+
+        
+        currency: RUB
+
+        
+        requiredToStart: True
+
+        
+        minSalary: 7000
+
+        
+        maxSalary: 12000
+
+        
+        tax: 13
+
+        
+        insurance: 20
+
+        
+        count: 1
+
+        
+        clothes: 2000
+
+        
+        duties: - мыть полы
+- убирать подносы
+- выносить мусор
+
+        
+        equipmentSelector: ['поднос', 'мусорка', 'швабра. тряпка']
+
+        
+      
+    
+
+    Оборудование, расходы за месяц:
+
+    \begin{tikzpicture}
+    \pie [rotate = 180]
+    {
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        416/Бойлер, 1250/Витрина, 416/Касса, 0/Колонки, 500/Конвекционная печь, 625/Кофеварка, 16/Мусорка, 1458/Ноутбук, 833/Освещение, 62/Поднос, 750/Стол, 2500/Стул, 625/Телевизор, 12/Тряпка, 8/Швабра, 125/Эквайринг
+    }
+    \end{tikzpicture}
+  
+    Кухня
+
+    \begin{itemize}
+    \item Адрес: невский, 50
+    \item Площадь: 20
+    \item Тип владения: rent
+    \item Ежемесячный платеж: 20000
+    \end{itemize}
+    
+    Оборудование:
+    \begin{enumerate}
+      
+      \item Ножи
+        \begin{itemize}
+        
+          \item getPrices: {'start': 4200, 'monthly': 175}
+        
+          \item currency: RUB
+        
+          \item requiredToStart: True
+        
+          \item price: 700
+        
+          \item count: 6
+        
+          \item leasingTerm: 12
+        
+          \item serviceTerm: 24
+        
+          \item mass: 1
+        
+          \item tags: ['нож']
+        
+        \end{itemize}
+      
+      \item Стол
+        \begin{itemize}
+        
+          \item getPrices: {'start': 9000, 'monthly': 150}
+        
+          \item currency: RUB
+        
+          \item requiredToStart: True
+        
+          \item price: 3000
+        
+          \item count: 3
+        
+          \item leasingTerm: 12
+        
+          \item serviceTerm: 60
+        
+          \item mass: 10
+        
+        \end{itemize}
+      
+      \item Утварь
+        \begin{itemize}
+        
+          \item getPrices: {'start': 15000, 'monthly': 625}
+        
+          \item currency: RUB
+        
+          \item requiredToStart: True
+        
+          \item price: 5000
+        
+          \item count: 3
+        
+          \item leasingTerm: 12
+        
+          \item serviceTerm: 24
+        
+          \item watts: 1000
+        
+          \item mass: 3
+        
+          \item tags: ['утварь']
+        
+        \end{itemize}
+      
+      \item Холодильник
+        \begin{itemize}
+        
+          \item getPrices: {'start': 50000, 'monthly': 2083}
+        
+          \item currency: RUB
+        
+          \item requiredToStart: True
+        
+          \item price: 50000
+        
+          \item count: 1
+        
+          \item leasingTerm: 12
+        
+          \item serviceTerm: 24
+        
+          \item watts: 6000
+        
+          \item mass: 1
+        
+          \item tags: ['холодильник']
+        
+        \end{itemize}
+      
+    \end{enumerate}
+    
+    
+      
+      Повар
+        
+        getPrices: {'start': 150827, 'monthly': 144827, 'taxes': 15689, 'insurance': 24137}
+
+        
+        currency: RUB
+
+        
+        requiredToStart: True
+
+        
+        minSalary: 30000
+
+        
+        maxSalary: 40000
+
+        
+        tax: 13
+
+        
+        insurance: 20
+
+        
+        count: 3
+
+        
+        clothes: 2000
+
+        
+        duties: нарезать продукты, готовить еду
+
+        
+        equipmentSelector: ['нож', 'стол', 'утварь']
+
+        
+      
+    
+
+    Оборудование, расходы за месяц:
+
+    \begin{tikzpicture}
+    \pie [rotate = 180]
+    {
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        175/Ножи, 150/Стол, 625/Утварь, 2083/Холодильник
+    }
+    \end{tikzpicture}
+  
+
+
+
+Франшиза:
+  
+      Milkyway
+
+      Роялти: 3
+      
+      База роялти: profit
+      
+      База процента с продаж: profit
+
+      Возмещение расходов: 50000 UR
+  
+
+
+
+  
+      Хлеб черный
+
+      Рецепт: нарезать
+
+      Срок преобразования: 1 дней
+      
+      Можно ускориться в 5 раз
+
+      
+      Для этого потребуется
+      \begin{itemize}
+      
+      \item черный хлеб в количестве 1.0
+      
+      \end{itemize}
+      
+  
+
+
+\begin{tikzpicture}
+        \begin{axis}[
+            symbolic x coords={a small bar, a medium bar, a large bar},
+            xtick=data
+          ]
+            \addplot[ybar,fill=blue] coordinates {
+                (a small bar,   42)
+                (a medium bar,  50)
+                (a large bar,   80)
+            };
+        \end{axis}
+    \end{tikzpicture}
+\end{document}

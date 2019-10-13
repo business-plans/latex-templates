@@ -5,10 +5,11 @@
 \usepackage{pgfplots}
 \usepackage[english,russian]{babel}
 \usepackage{amssymb,amsfonts,amsmath,mathtext,cite,enumerate,float}
+\title{ {{ releaseName }} }
 
 \begin{document}
-  \title{ {{ releaseName }} }
-  
+\maketitle
+
   Основная цель: {{ mainGoal }}
 
   Прогноз инфляции: {{ inflationPrognosis }}
@@ -90,17 +91,15 @@
     {% if 'Equipment' in content %}
     Оборудование:
     \begin{center}
-      \begin{tabular}{ |c|c|c|c|c|c|c|c| }
+      \begin{tabular}{ |c|c|c|c|c|c| }
          \hline
-         Оборудование & Цена & Количество & Срок службы, мес & Мощность, Вт & Масса, кг & Лизинговый платеж & Срок лизинга, мес\\
+         Оборудование & Количество & Цена & Срок службы, мес & Лизинговый платеж & Срок лизинга, мес\\
       {% for equipmentName, params in content.Equipment.items() -%}
          \hline
          {{ equipmentName }} &
-         {{ params.price }} {{ params.currency }} &
          {{ params.count }} &
+         {{ params.price }} {{ params.currency }} &
          {{ params.serviceTerm }} &
-         {{ params.watts or '-' }} &
-         {{ params.mass or '-' }} &
          {{ params.leasingFee or '-' }}{{ params.currency if 'leasingFee' in params and leasingFee!=0 }} &
          {{ params.leasingTerm if 'leasingFee' in params and leasingFee!=0 }}\\
       {%- endfor %}

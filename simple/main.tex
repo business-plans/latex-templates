@@ -7,7 +7,7 @@
 \usepackage{amssymb,amsfonts,amsmath,mathtext,cite,enumerate,float}
 
 \begin{document}
-  Бизнес-план: {{ releaseName }}
+  \title{ {{ releaseName }} }
   
   Основная цель: {{ mainGoal }}
 
@@ -15,39 +15,43 @@
 
 {% if TargetHumanAuditory is defined and TargetHumanAuditory|length %}
   \begin{itemize}
-  {% for name, content in TargetHumanAuditory.items() %}
+  {% for name, content in TargetHumanAuditory.items() -%}
     \item {{ name }}
 
     Возраст от {{ content.agesFrom }} до {{ content.agesTo }}
-    {% if content.sameCity %}в том же городе{% endif %}
-    {% if content.gender=='B' %} обоих полов
-    {% elif content.gender=='F' %}только женщины
-    {% else %}только мужчины
-    {% endif %}.
-    {% if content.when %}
+    {% if content.sameCity %}в городе моего проживания{% endif %}
+      {%- if content.gender=='B' -%}
+        обоих полов
+      {%- elif content.gender=='F' -%}
+        только женщины
+      {%- else -%}
+        только мужчины
+      {%- endif %}.
+    {% if content.when -%}
     Будут обращаться {{ content.when }}.
-    {% endif %}
-  {% endfor %}
+    {%- endif %}
+  {%- endfor %}
   \end{itemize}
 {% endif %}
 
-{% if TargetCompaniesAuditory is defined and TargetCompaniesAuditory|length %}
+{% if TargetCompaniesAuditory is defined and TargetCompaniesAuditory|length -%}
   \begin{itemize}
   {% for name, content in TargetCompaniesAuditory.items() %}
     \item {{ name }}
     Области деятельности:
     \begin{itemize}
-    {% for f in content.field.split(',') %}
-    \item {{ f }}{% endfor %}
+    {% for f in content.field.split(',') -%}
+      \item {{ f }}
+    {%- endfor %}
     \end{itemize}
-    {% if content.sameCity %}в том же городе{% endif %}
-  {% endfor %}
+    {% if content.sameCity %}Расположены в городе моего проживания{% endif %}
+  {%- endfor %}
   \end{itemize}
-{% endif %}
+{%- endif %}
 
-{% if Ad is defined and Ad|length %}
-  {% for name, content in Ad.items() %}
-    {% if content.isActive %}
+{% if Ad is defined and Ad|length -%}
+  {% for name, content in Ad.items() -%}
+    {% if content.isActive -%}
       {{ name }}
 
       Описание: {{ content.description }}
@@ -55,12 +59,12 @@
       Начальная цена: {{ content.initialPrice }}
       
       Цена за месяц: {{ content.pricePerMonth }}
-    {% endif %}
-  {% endfor %}
-{% endif %}
+    {%- endif %}
+  {%- endfor %}
+{%- endif %}
 
-{% if CommercialCredit is defined and CommercialCredit|length %}
-  {% for name, content in CommercialCredit.items() %}
+{% if CommercialCredit is defined and CommercialCredit|length -%}
+  {% for name, content in CommercialCredit.items() -%}
       {{ name }}
 
       Банк: {{ content.bank }}
@@ -70,11 +74,11 @@
       Ставка: {{ content.rate }}
 
       Срок: {{ content.duration }} месяцев
-  {% endfor %}
-{% endif %}
+  {%- endfor %}
+{%- endif %}
 
-{% if CommercialEstate is defined and CommercialEstate|length %}
-  {% for name, content in CommercialEstate.items() %}
+{% if CommercialEstate is defined and CommercialEstate|length -%}
+  {% for name, content in CommercialEstate.items() -%}
     {{ name }}
 
     \begin{itemize}
@@ -85,15 +89,24 @@
     \end{itemize}
     {% if 'Equipment' in content %}
     Оборудование:
-    \begin{enumerate}
-      {% for equipmentName, params in content.Equipment.items() %}
-      \item {{ equipmentName }}
-        \begin{itemize}
-        {% for key, value in params.items() %}
-        {% if key!= 'getPrices' %}\item {{ key }}: {{ value }}{% endif %}{% endfor %}
-        \end{itemize}
-      {% endfor %}
-    \end{enumerate}
+    \begin{center}
+      \begin{tabular}{ |c|c|c| }
+         \hline
+         Оборудование & Цена & Количество & Срок службы, мес & Мощность, Вт & Масса, кг & Лизинговый платеж & Срок лизинга, мес\\
+      {% for equipmentName, params in content.Equipment.items() -%}
+         \hline
+         {{ equipmentName }} &
+         {{ params.price }} {{ params.currency }} &
+         {{ params.count }} &
+         {{ params.serviceTerm }} &
+         {{ params.watts or '-' }} &
+         {{ params.mass or '-' }} &
+         {{ params.leasingFee params.currency or '-' }} &
+         {{ params.leasingTerm if 'leasingFee' in params and leasingFee!=0 }}\\
+      {%- endfor %}
+         \hline
+      \end{tabular}
+    \end{center}
     {% endif %}
     {% if 'Worker' in content %}
       {% for role, params in content.Worker.items() %}
@@ -103,27 +116,30 @@
       {% endfor %}
     {% endif %}
 
-    {% if 'distribution' in content.getPrices %}
+    {% if 'distribution' in content.getPrices -%}
     Оборудование, расходы за месяц:
-
     {% set l=[] %}{% set vv=[] %}
-    {% for name, value in content.getPrices.distribution.equipments.monthly.items() %}
-      {% set tmp=100*value/content.getPrices.perCategory.monthly['Оборудование'] %}{% if tmp>5 %}{% if l.append( tmp|round|int|string + "/" + name|string )%}{% endif %}
-      {% else %}{% if vv.append(tmp) %}{% endif %}{% endif %}
-    {% endfor %}
+    {% for name, value in content.getPrices.distribution.equipments.monthly.items() -%}
+      {% set tmp=100*value/content.getPrices.perCategory.monthly['Оборудование'] %}
+      {% if tmp>5 -%}
+        {% if l.append( tmp|round|int|string + "/" + name|string )-%}{% endif %}
+      {%- else %}
+        {%- if vv.append(tmp) %}{% endif %}
+      {%- endif %}
+    {%- endfor %}
     \begin{tikzpicture}
     \pie [rotate = 180]
     {
         {{ l | join(", ") }}{% if vv|sum > 2 %}, {{ vv|sum|int }}/Остальное {% endif %}
     }
     \end{tikzpicture}
-    {% endif %}
-  {% endfor %}
-{% endif %}
+    {%- endif %}
+  {%- endfor %}
+{%- endif %}
 
-{% if Franchise is defined and Franchise|length %}
+{% if Franchise is defined and Franchise|length -%}
 Франшиза:
-  {% for name, content in Franchise.items() %}
+  {% for name, content in Franchise.items() -%}
       {{ name }}
 
       Роялти: {{ content.royalty }}
@@ -133,11 +149,11 @@
       База процента с продаж: {{ content.salesPercentBase }}
 
       Возмещение расходов: {{ content.reimbursement }} {{ content.currency }}
-  {% endfor %}
-{% endif %}
+  {%- endfor %}
+{%- endif %}
 
-{% if MaterialsConversion is defined and MaterialsConversion|length %}
-  {% for name, content in MaterialsConversion.items() %}
+{% if MaterialsConversion is defined and MaterialsConversion|length -%}
+  {% for name, content in MaterialsConversion.items() -%}
       {{ name }}
 
       Рецепт: {{ content.recipe }}
@@ -146,15 +162,16 @@
       
       Можно ускориться в {{ content.multiplier }} раз
 
-      {% if 'InputMaterial' in content %}
+      {% if 'InputMaterial' in content -%}
       Для этого потребуется
       \begin{itemize}
-      {% for mat in content.InputMaterial%}
-      \item {{ mat.substanceTags | join(" ") }} в количестве {{ mat.amount }}{% endfor %}
+      {% for mat in content.InputMaterial -%}
+      \item {{ mat.substanceTags | join(" ") }} в количестве {{ mat.amount }}
+      {%- endfor %}
       \end{itemize}
-      {% endif %}
-  {% endfor %}
-{% endif %}
+      {%- endif %}
+  {%- endfor %}
+{%- endif %}
 
 \begin{tikzpicture}
         \begin{axis}[

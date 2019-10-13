@@ -119,10 +119,7 @@
     \begin{tikzpicture}
     \pie [rotate = 180]
     {
-        {{ l | join(", ") }}
-    {% if vv|sum|int > 1 %}
-        , {{ vv|sum|int }}/Остальное
-    {% endif %}
+        {{ l | join(", ") }}{% if vv|sum > 2 %}, {{ vv|sum|int }}/Остальное {% endif %}
     }
     \end{tikzpicture}
     {% endif %}

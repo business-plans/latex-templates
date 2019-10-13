@@ -101,7 +101,7 @@
          {{ params.serviceTerm }} &
          {{ params.watts or '-' }} &
          {{ params.mass or '-' }} &
-         {{ params.leasingFee params.currency or '-' }} &
+         {{ params.leasingFee or '-' }}{{ params.currency if 'leasingFee' in params and leasingFee!=0 }} &
          {{ params.leasingTerm if 'leasingFee' in params and leasingFee!=0 }}\\
       {%- endfor %}
          \hline

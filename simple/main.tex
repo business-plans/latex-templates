@@ -5,6 +5,12 @@
 \usepackage{pgfplots}
 \usepackage[english,russian]{babel}
 \usepackage{amssymb,amsfonts,amsmath,mathtext,cite,enumerate,float}
+\usepackage{geometry} % Меняем поля страницы
+
+\geometry{left=2cm}% левое поле
+\geometry{right=1.5cm}% правое поле
+\geometry{top=1cm}% верхнее поле
+\geometry{bottom=2cm}% нижнее поле
 \title{ {{ releaseName }} }
 
 \begin{document}
@@ -20,7 +26,7 @@
     \item {{ name }}
 
     Возраст от {{ content.agesFrom }} до {{ content.agesTo }}
-    {% if content.sameCity %}в городе моего проживания{% endif %}
+    {% if content.sameCity %}в городе моего проживания {% endif %}
       {%- if content.gender=='B' -%}
         обоих полов
       {%- elif content.gender=='F' -%}
@@ -91,7 +97,7 @@
     {% if 'Equipment' in content %}
     Оборудование:
     \begin{center}
-      \begin{tabular}{ |c|c|c|c|c|c| }
+      \begin{tabular}{ |p{2cm}|c|c|p{1cm}|p{1cm}|p{1cm}| }
          \hline
          Оборудование & Количество & Цена & Срок службы, мес & Лизинговый платеж & Срок лизинга, мес\\
       {% for equipmentName, params in content.Equipment.items() -%}

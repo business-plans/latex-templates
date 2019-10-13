@@ -116,11 +116,10 @@
         {% if vv.append(tmp) %}{% endif %}
       {% endif %}
     {% endfor %}
-, {{ vv|sum|int }}/Остальное
     \begin{tikzpicture}
     \pie [rotate = 180]
     {
-        {{ l | join(", ") }}
+        {{ l | join(", ") }}, {{ vv|sum|int }}/Остальное
     }
     \end{tikzpicture}
     {% endif %}

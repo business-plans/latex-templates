@@ -106,15 +106,10 @@
     {% if 'distribution' in content.getPrices %}
     Оборудование, расходы за месяц:
 
-    {% set l=[] %}
-    {% set vv=[] %}
+    {% set l=[] %}{% set vv=[] %}
     {% for name, value in content.getPrices.distribution.equipments.monthly.items() %}
-      {% set tmp=100*value/content.getPrices.perCategory.monthly['Оборудование'] %}
-      {% if tmp>5 %}
-        {% if l.append( tmp|round|int|string + "/" + name|string )%}{% endif %}
-      {% else %}
-        {% if vv.append(tmp) %}{% endif %}
-      {% endif %}
+      {% set tmp=100*value/content.getPrices.perCategory.monthly['Оборудование'] %}{% if tmp>5 %}{% if l.append( tmp|round|int|string + "/" + name|string )%}{% endif %}
+      {% else %}{% if vv.append(tmp) %}{% endif %}{% endif %}
     {% endfor %}
     \begin{tikzpicture}
     \pie [rotate = 180]

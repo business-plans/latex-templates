@@ -105,13 +105,13 @@
     {% set nameCols='' %}
     {% if vars.hasLeasing -%}
       {% set cols='p{2cm}|p{2cm}|' %}
-      {% nameCols='& Лизинговый платеж & Срок лизинга, мес' %}
+      {% set nameCols='& Лизинговый платеж & Срок лизинга, мес' %}
     {%- endif %}
     Оборудование:
     \begin{center}
       \begin{tabular}{ |p{3cm}|c|c|p{2cm}|{{ cols }} }
          \hline
-         Оборудование & Количество & Цена & Срок службы, мес {{nameCols}} \\
+         Оборудование & Количество & Цена & Срок службы, мес {{ nameCols }} \\
       {% for equipmentName, params in content.Equipment.items() -%}
          \hline
          {{ equipmentName }}

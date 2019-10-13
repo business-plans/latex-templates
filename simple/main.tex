@@ -95,19 +95,31 @@
     \item Ежемесячный платеж: {{ content.payment }}
     \end{itemize}
     {% if 'Equipment' in content %}
+    {% set vars={'hasLeasing': False} %}
+    {% for equipmentName, params in content.Equipment.items() -%}
+      {% if 'leasingFee' in params and leasingFee!=0 -%}
+        {% if vars.update({'hasLeasing': True}) %} {% endif %}
+      {%- endif %}
+    {%- endfor %}
+    {% set cols='' %}
+    {% if vars.hasLeasing -%}
+      {% set cols='p{2cm}|p{2cm}|' %}
+    {%- endif %}
     Оборудование:
     \begin{center}
-      \begin{tabular}{ |p{3cm}|c|c|p{2cm}|p{2cm}|p{2cm}| }
+      \begin{tabular}{ |p{3cm}|c|c|p{2cm}|{{ cols }} }
          \hline
          Оборудование & Количество & Цена & Срок службы, мес & Лизинговый платеж & Срок лизинга, мес\\
       {% for equipmentName, params in content.Equipment.items() -%}
          \hline
-         {{ equipmentName }} &
-         {{ params.count }} &
-         {{ params.price }} {{ params.currency }} &
-         {{ params.serviceTerm }} &
-         {{ params.leasingFee or '-' }}{{ params.currency if 'leasingFee' in params and leasingFee!=0 }} &
-         {{ params.leasingTerm if 'leasingFee' in params and leasingFee!=0 }}\\
+         {{ equipmentName }}
+         & {{ params.count }}
+         & {{ params.price }} {{ params.currency }}
+         & {{ params.serviceTerm }}
+    {% if vars.hasLeasing -%}
+         & {{ params.leasingFee or '-' }}{{ params.currency if 'leasingFee' in params and leasingFee!=0 }}
+         & {{ params.leasingTerm if 'leasingFee' in params and leasingFee!=0 }}
+    {%- endif %}\\
       {%- endfor %}
          \hline
       \end{tabular}

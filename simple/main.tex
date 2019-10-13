@@ -97,7 +97,7 @@
     {% if 'Equipment' in content %}
     Оборудование:
     \begin{center}
-      \begin{tabular}{ |p{2cm}|c|c|p{1cm}|p{1cm}|p{1cm}| }
+      \begin{tabular}{ |p{3cm}|c|c|p{2cm}|p{2cm}|p{2cm}| }
          \hline
          Оборудование & Количество & Цена & Срок службы, мес & Лизинговый платеж & Срок лизинга, мес\\
       {% for equipmentName, params in content.Equipment.items() -%}

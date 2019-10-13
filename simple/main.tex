@@ -97,7 +97,7 @@
 
       Банк: {{ content.bank }}
       
-      Цена: {{ content.price }}
+      Цена: {{ content.price }} {{ content.currency }}
       
       Ставка: {{ content.rate }} \%
 
@@ -116,18 +116,18 @@
     \item Тип владения: {{ content.owningType }}
     \item Ежемесячный платеж: {{ content.payment }}
     \end{itemize}
-    {% if 'Equipment' in content %}
-    {% set vars={'hasLeasing': False} %}
+    {% if 'Equipment' in content -%}
+    {%- set vars={'hasLeasing': False} %}
     {% for equipmentName, params in content.Equipment.items() -%}
       {% if 'leasingFee' in params and leasingFee!=0 -%}
         {% if vars.update({'hasLeasing': True}) %} {% endif %}
       {%- endif %}
     {%- endfor %}
-    {% set cols='' %}
+    {% set cols='' -%}
     {% set nameCols='' %}
     {% if vars.hasLeasing -%}
-      {% set cols='p{2.4cm}|p{2.4cm}|' %}
-      {% set nameCols='& Лизинговый платеж & Срок лизинга, мес' %}
+      {% set cols='p{2.4cm}|p{2.4cm}|' -%}
+      {% set nameCols='& Лизинговый платеж & Срок лизинга, мес' -%}
     {%- endif %}
     Оборудование:
     \begin{center}
@@ -145,6 +145,12 @@
          & {{ params.leasingTerm if 'leasingFee' in params and leasingFee!=0 }}
     {%- endif %}\\
       {% endfor %}
+         \hline
+         \hline
+         Итого & - & {{ content.getPrices.totalPrice }} & -
+    {% if vars.hasLeasing -%}
+        & - & -
+    {%- endif %}\\
          \hline
       \end{tabular}
     \end{center}
@@ -164,7 +170,7 @@
     \begin{tikzpicture}
     \pie [rotate = 180]
     {
-        {{ l | join(", ") }}{% if vv|sum > 2 %}, {{ vv|sum|int }}/Остальное {% endif %}
+        {{ l | join(", ") }}{% if vv|sum > 2 %}, {{ vv|sum|round|int }}/Остальное {% endif %}
     }
     \end{tikzpicture}
     {%- endif %}

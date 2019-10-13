@@ -29,13 +29,13 @@
       \item {{ name }}
 
       От {{ content.agesFrom }} до {{ content.agesTo }} лет 
-        {% if content.gender=='B' %}
+        {% if content.gender=='B' -%}
           обоих полов
         {% elif content.gender=='F' -%}
           только женщины
         {% else -%}
           только мужчины
-        {%- endif %}
+        {%- endif -%}
       {% if content.sameCity -%}в городе моего проживания{%- endif %}.
       {% if content.when -%}
       Будут обращаться {{ content.when }}.
@@ -129,7 +129,6 @@
       {% set cols='p{2.4cm}|p{2.4cm}|' -%}
       {% set nameCols='& Лизинговый платеж & Срок лизинга, мес' -%}
     {%- endif %}
-    Оборудование:
     \begin{center}
       \begin{tabular}{ |p{3cm}|c|c|p{2cm}|{{ cols }} }
          \hline
@@ -158,7 +157,6 @@
 
     {% if 'distribution' in content.getPrices -%}
     \begin{figure}
-    \caption{Оборудование, расходы за месяц}
     {% set l=[] %}{% set vv=[] %}
     {% for name, value in content.getPrices.distribution.equipments.monthly.items() -%}
       {% set tmp=100*value/content.getPrices.perCategory.monthly['Оборудование'] %}
@@ -174,11 +172,12 @@
         {{ l | join(", ") }}{% if vv|sum > 2 %}, {{ vv|sum|round|int }}/Остальное {% endif %}
     }
     \end{tikzpicture}
+    \caption{Оборудование, расходы за месяц}
     \end{figure}
     {%- endif %}
     {%- if 'Worker' in content -%}
     \begin{center}
-      \begin{tabular}{ |p{2cm}|p{2.4cm}|p{2.4cm}|p{1.8cm}|p{1.7cm}|p{2.4cm} }
+      \begin{tabular}{ |p{2cm}|p{2.5cm}|p{2.5cm}|p{1.6cm}|p{1.6cm}|p{2.4cm} }
          \hline
       Должность & Минимальная з/п & Максимальная з/п & Одежда & НДФЛ (\%) & Страхование (\%) \\
       {% for role, params in content.Worker.items() -%}

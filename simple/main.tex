@@ -110,9 +110,10 @@
     {% set vv=[] %}
     {% for name, value in content.getPrices.distribution.equipments.monthly.items() %}
       {% set tmp=100*value/content.getPrices.perCategory.monthly['Оборудование'] %}
-      {% if tmp>3 and l.append( tmp|round|int|string + "/" + name|string )%}
+      {% if tmp>4 %}
+        {% if l.append( tmp|round|int|string + "/" + name|string )%}{% endif %}
       {% else %}
-      {% if vv.append(tmp) %}{% endif %}
+        {% if vv.append(tmp) %}{% endif %}
       {% endif %}
     {% endfor %}
 , {{ vv|sum|int }}/Остальное

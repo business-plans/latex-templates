@@ -18,45 +18,50 @@
 
   Основная цель: {{ mainGoal }}
 
-  Прогноз инфляции: {{ inflationPrognosis }}
+  Прогноз инфляции: {{ inflationPrognosis }} \%
 
-{% if TargetHumanAuditory is defined and TargetHumanAuditory|length %}
-  \begin{itemize}
-  {% for name, content in TargetHumanAuditory.items() -%}
-    \item {{ name }}
-
-    Возраст от {{ content.agesFrom }} до {{ content.agesTo }}
-    {% if content.sameCity %}в городе моего проживания {% endif %}
-      {%- if content.gender=='B' -%}
-        обоих полов
-      {%- elif content.gender=='F' -%}
-        только женщины
-      {%- else -%}
-        только мужчины
-      {%- endif %}.
-    {% if content.when -%}
-    Будут обращаться {{ content.when }}.
-    {%- endif %}
-  {%- endfor %}
-  \end{itemize}
-{% endif %}
-
-{% if TargetCompaniesAuditory is defined and TargetCompaniesAuditory|length -%}
-  \begin{itemize}
-  {% for name, content in TargetCompaniesAuditory.items() %}
-    \item {{ name }}
-    Области деятельности:
+{% if (TargetHumanAuditory is defined and TargetHumanAuditory|length) or 
+  (TargetCompaniesAuditory is defined and TargetCompaniesAuditory|length) -%}
+  \section{Целевые аудитории}
+  {% if TargetHumanAuditory is defined and TargetHumanAuditory|length %}
     \begin{itemize}
-    {% for f in content.field.split(',') -%}
-      \item {{ f }}
+    {% for name, content in TargetHumanAuditory.items() -%}
+      \item {{ name }}
+
+      От {{ content.agesFrom }} до {{ content.agesTo }} лет
+        {%- if content.gender=='B' -%}
+          обоих полов
+        {%- elif content.gender=='F' -%}
+          только женщины
+        {%- else -%}
+          только мужчины
+        {%- endif %}.
+      {% if content.sameCity %}в городе моего проживания {% endif %}
+      {% if content.when -%}
+      Будут обращаться {{ content.when }}.
+      {%- endif %}
     {%- endfor %}
     \end{itemize}
-    {% if content.sameCity %}Расположены в городе моего проживания{% endif %}
-  {%- endfor %}
-  \end{itemize}
+  {% endif %}
+
+  {% if TargetCompaniesAuditory is defined and TargetCompaniesAuditory|length -%}
+    \begin{itemize}
+    {% for name, content in TargetCompaniesAuditory.items() %}
+      \item {{ name }}
+      Области деятельности:
+      \begin{itemize}
+      {% for f in content.field.split(',') -%}
+        \item {{ f }}
+      {%- endfor %}
+      \end{itemize}
+      {% if content.sameCity %}Расположены в городе моего проживания{% endif %}
+    {%- endfor %}
+    \end{itemize}
+  {%- endif %}
 {%- endif %}
 
 {% if Ad is defined and Ad|length -%}
+  \section{Реклама}
   {% for name, content in Ad.items() -%}
     {% if content.isActive -%}
       {{ name }}
@@ -71,6 +76,7 @@
 {%- endif %}
 
 {% if CommercialCredit is defined and CommercialCredit|length -%}
+  \section{Кредиты}
   {% for name, content in CommercialCredit.items() -%}
       {{ name }}
 
@@ -78,13 +84,14 @@
       
       Цена: {{ content.price }}
       
-      Ставка: {{ content.rate }}
+      Ставка: {{ content.rate }} \%
 
       Срок: {{ content.duration }} месяцев
   {%- endfor %}
 {%- endif %}
 
 {% if CommercialEstate is defined and CommercialEstate|length -%}
+  \section{Недвижимость}
   {% for name, content in CommercialEstate.items() -%}
     {{ name }}
 
@@ -157,7 +164,7 @@
 {%- endif %}
 
 {% if Franchise is defined and Franchise|length -%}
-Франшиза:
+\section{Франшиза}
   {% for name, content in Franchise.items() -%}
       {{ name }}
 
@@ -172,6 +179,7 @@
 {%- endif %}
 
 {% if MaterialsConversion is defined and MaterialsConversion|length -%}
+\section{Преобразования материалов}
   {% for name, content in MaterialsConversion.items() -%}
       {{ name }}
 
@@ -204,4 +212,4 @@
             };
         \end{axis}
     \end{tikzpicture}
-\end{document} 
+\end{document}

@@ -28,15 +28,15 @@
     {% for name, content in TargetHumanAuditory.items() -%}
       \item {{ name }}
 
-      От {{ content.agesFrom }} до {{ content.agesTo }} лет
+      От {{ content.agesFrom }} до {{ content.agesTo }} лет 
         {%- if content.gender=='B' -%}
           обоих полов
         {%- elif content.gender=='F' -%}
           только женщины
         {%- else -%}
           только мужчины
-        {%- endif %}.
-      {% if content.sameCity %}в городе моего проживания {% endif %}
+        {%- endif %}
+      {% if content.sameCity %}в городе моего проживания {% endif %}.
       {% if content.when -%}
       Будут обращаться {{ content.when }}.
       {%- endif %}
@@ -47,7 +47,7 @@
   {% if TargetCompaniesAuditory is defined and TargetCompaniesAuditory|length -%}
     \begin{itemize}
     {% for name, content in TargetCompaniesAuditory.items() %}
-      \item {{ name }}
+      \item {{ name }}. 
       Области деятельности:
       \begin{itemize}
       {% for f in content.field.split(',') -%}
@@ -59,6 +59,21 @@
     \end{itemize}
   {%- endif %}
 {%- endif %}
+
+{%- if Franchise is defined and Franchise|length -%}
+\section{Франшиза}
+  {% for name, content in Franchise.items() -%}
+      {{ name }}
+
+      Роялти: {{ content.royalty }}
+      
+      База роялти: {{ content.royaltyBase }}
+      
+      База процента с продаж: {{ content.salesPercentBase }}
+
+      Возмещение расходов: {{ content.reimbursement }} {{ content.currency }}
+  {%- endfor -%}
+{%- endif -%}
 
 {% if Ad is defined and Ad|length -%}
   \section{Реклама}
@@ -93,7 +108,7 @@
 {% if CommercialEstate is defined and CommercialEstate|length -%}
   \section{Недвижимость}
   {% for name, content in CommercialEstate.items() -%}
-    {{ name }}
+    \subsection{ {{ name }} }
 
     \begin{itemize}
     \item Адрес: {{ content.address }}
@@ -111,7 +126,7 @@
     {% set cols='' %}
     {% set nameCols='' %}
     {% if vars.hasLeasing -%}
-      {% set cols='p{2cm}|p{2cm}|' %}
+      {% set cols='p{2.4cm}|p{2.4cm}|' %}
       {% set nameCols='& Лизинговый платеж & Срок лизинга, мес' %}
     {%- endif %}
     Оборудование:
@@ -134,13 +149,6 @@
       \end{tabular}
     \end{center}
     {% endif %}
-    {% if 'Worker' in content %}
-      {% for role, params in content.Worker.items() %}
-      {{ role }}
-        {% for key, value in params.items() %}
-        {% if key!= 'getPrices' %}{{ key }}: {{ value }}{% endif %}{% endfor %}
-      {% endfor %}
-    {% endif %}
 
     {% if 'distribution' in content.getPrices -%}
     Оборудование, расходы за месяц:
@@ -160,21 +168,24 @@
     }
     \end{tikzpicture}
     {%- endif %}
-  {%- endfor %}
-{%- endif %}
-
-{% if Franchise is defined and Franchise|length -%}
-\section{Франшиза}
-  {% for name, content in Franchise.items() -%}
-      {{ name }}
-
-      Роялти: {{ content.royalty }}
-      
-      База роялти: {{ content.royaltyBase }}
-      
-      База процента с продаж: {{ content.salesPercentBase }}
-
-      Возмещение расходов: {{ content.reimbursement }} {{ content.currency }}
+    {%- if 'Worker' in content -%}
+    \begin{center}
+      \begin{tabular}{ |p{2cm}|c|c|p{2cm}|p{2cm}|p{3cm} }
+         \hline
+      Должность & Минимальная з/п & Максимальная з/п & Одежда & НДФЛ (\%) & Страхование (\%) \\
+      {% for role, params in content.Worker.items() -%}
+      \hline
+      {{ role }}
+      & {{ params.minSalary }} {{ params.currency }}
+      & {{ params.maxSalary }} {{ params.currency }}
+      & {{ params.clothes }} {{ params.currency }}
+      & {{ params.tax }}
+      & {{ params.insurance }} \\
+      {%- endfor %}
+         \hline
+      \end{tabular}
+    \end{center}
+    {%- endif -%}
   {%- endfor %}
 {%- endif %}
 

@@ -110,7 +110,7 @@
     {% set vv=[] %}
     {% for name, value in content.getPrices.distribution.equipments.monthly.items() %}
       {% set tmp=100*value/content.getPrices.perCategory.monthly['Оборудование'] %}
-      {% if tmp>4 %}
+      {% if tmp>5 %}
         {% if l.append( tmp|round|int|string + "/" + name|string )%}{% endif %}
       {% else %}
         {% if vv.append(tmp) %}{% endif %}
@@ -119,7 +119,10 @@
     \begin{tikzpicture}
     \pie [rotate = 180]
     {
-        {{ l | join(", ") }}, {{ vv|sum|int }}/Остальное
+        {{ l | join(", ") }}
+    {% if vv|sum|int > 1 %}
+        , {{ vv|sum|int }}/Остальное
+    {% endif %}
     }
     \end{tikzpicture}
     {% endif %}

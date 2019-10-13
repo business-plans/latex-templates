@@ -83,9 +83,9 @@
 
       Описание: {{ content.description }}
       
-      Начальная цена: {{ content.initialPrice }}
+      Начальная цена: {{ content.initialPrice }} {{ content.currency }}
       
-      Цена за месяц: {{ content.pricePerMonth }}
+      Цена за месяц: {{ content.pricePerMonth }} {{ content.currency }}
     {%- endif %}
   {%- endfor %}
 {%- endif %}
@@ -161,7 +161,7 @@
     {% for name, value in content.getPrices.distribution.equipments.monthly.items() -%}
       {% set tmp=100*value/content.getPrices.perCategory.monthly['Оборудование'] %}
       {% if tmp>5 -%}
-        {% if l.append( tmp|round|int|string + "/" + name|string )-%}{% endif %}
+        {% if l.append( tmp|round|int|string + "/" + name +" (" + value|string + " " + content.currency + ")" )-%}{% endif %}
       {%- else %}
         {%- if vv.append(tmp) %}{% endif %}
       {%- endif %}
